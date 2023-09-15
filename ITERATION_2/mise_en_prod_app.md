@@ -69,4 +69,8 @@ https://www.hostinger.fr/tutoriels/commandes-linux
 ### PHP-FPM et NGINX
 
 #### PHP-FPM
+Source : 
+- https://www.theory7.net/fr/help/php-fpm/
+- https://www.stackscale.com/blog/php-fpm-high-traffic-websites/
+
 Permet d'améliorer les performances de notre site web s'ils fonctionnent en PHP
