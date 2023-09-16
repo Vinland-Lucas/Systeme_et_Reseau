@@ -2,7 +2,8 @@
 
 ## Connection à un serveur distant avec SSH et administration Linux
 
-Source : 
+Source :
+- https://www.youtube.com/watch?v=gxQKw7A6qDM --> intro sur le SSH
 - https://www.hostinger.fr/tutoriels/ssh-linux --> introduction sur le ssh
 - https://doc.ubuntu-fr.org/ssh --> connexion via ssh
 
