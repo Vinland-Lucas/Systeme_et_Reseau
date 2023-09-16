@@ -24,12 +24,17 @@ Les différents modes d'utilisation de SSH sont :
 - authentification par mot de passe
 - authentification par clé publique / privée
 
-### Comprendre différentes techniques de cryptage
+A retenir : L’avantage important offert par SSH par rapport à ses prédécesseurs est l’utilisation du cryptage pour assurer le transfert sécurisé d’informations entre l’hôte et le client
+
+### Comprendre différentes techniques de cryptage utilisées par SSH
 
 #### Cryptage symétrique
 voir source
 
 #### Cryptage asymétrique
+voir source
+
+#### Hashing
 voir source
 
 ### Comment est établie une connection SSH entre un client et un serveur avec la méthode la plus sécurisé (faites un schéma)
