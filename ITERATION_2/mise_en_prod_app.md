@@ -30,10 +30,10 @@ Les différents modes d'utilisation de SSH sont :
 ### Comprendre différentes techniques de cryptage utilisées par SSH
 
 #### Cryptage symétrique
-voir source
+https://www.it-connect.fr/les-cles-symetriques/
 
 #### Cryptage asymétrique
-voir source
+https://www.it-connect.fr/les-cles-asymetriques/
 
 #### Hashing
 voir source
