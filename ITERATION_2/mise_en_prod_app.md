@@ -79,4 +79,55 @@ Source :
 - https://www.theory7.net/fr/help/php-fpm/
 - https://www.stackscale.com/blog/php-fpm-high-traffic-websites/
 
-Permet d'améliorer les performances de notre site web s'ils fonctionnent en PHP
+PHP-FPM = PHP FastCGI Process Manager
+
+--> Permet d'améliorer les performances des sites web à fort trafic s'ils fonctionnent en PHP.
+
+Comment c'est possible ? <br>
+En fait, PHP-FPM offre des fonctionnalités permettant une gestion plus efficace de la mémoire et du processeur, entre autre les ressources du système.
+Ces fonctionnalités, on va pouvoir les appliquer à nos processus donc à notre code, à nos scripts ce qui permet d'améliorer les performances et la stabilité du site web.
+
+Voici quelques une des ces fonctionnalités (en anglais psq on parle anglais poto): 
+- Advanced management that enables to easily stop/start processes
+- Accelerated support for uploads
+- Slowlog variable configuration --> to detect which functions take a longer time to execute than usual
+- FastCGI improvements --> a special function to stop and download all data while you keep doing a longer process such as video conversions or statistics processing.
+- Basic statistics
+cf. Source/La Doc pour le reste
+
+En outre, PHP-FPM fournit des stats et journaux détaillés, cela permet de surveiller et d'optimiser les performances des scripts PHP.<br>
+Par exemple, si un script utilisent + de ressources ou s'il met trop de temps à fournir une réponse, s'il y a beaucoup de trafic sur le site... PHP-FPM nous le remontera. Cela va donc nous permettre de savoir précisément qui améliorer (améliorer un script, lancer des processus supplémentaires pour répondre au pic de trafic...).
+
+cf.Source pour plus de détails
+
+#### NGINX
+Source :
+- https://kinsta.com/fr/base-de-connaissances/qu-est-ce-que-nginx/
+- https://www.ionos.fr/digitalguide/serveur/configuration/nginx-bases-installation-et-configuration/
+
+NGINX est un des serveurs web open-source les plus populaires et utilisés. <br>
+Ce serveur web est en fait souvent utilisé par les sites webs les plus fréquentés ou bien ceux qui pourraient voir leur trafic augmenter, par les sites les plus gourmands en ressources.
+
+Pourquoi ?<br>
+En fait, NGINX a été créé pour répondre à un besoin de serveur de haute-performance, pouvant servir simultanément autant de clients Web (donc de requêtes) que possible, et qui ne soit pas trop gourmand en ressources.
+
+NGINX utilise une approche asynchrone et événementielle, lui permettant donc d'exécuter des requêtes client simultanément sans bloquer les autres requêtes, sans devoir lancer un nouveau processus pour chaque requête client, et donc d'économiser de la mémoire vive, des ressources et du temps.
+
+Il faut savoir que NGINX présente une interface modulaire. Cela signifie que différentes fonctions sont proposés sur les modules correspondants, que les administrateurs choisissent d’activer ou non. <br>
+Voici quelques une des fonctionnalités proposées : 
+- Application Acceleration (accélération de l’application) : permet un chargement plus rapide des contenus
+- Reverse Proxying (proxy inverse)
+- Chiffrement TLS : permet un échange de données sécurisé
+- Gestion de la bande passante : associe la bande passante optimale pour chaque service proposé
+- Load Balancing (équilibreur de charge) : répartit les demandes de manière à décharger le serveur principal
+- Videostreaming (streaming vidéo) : offre une haute performance pour le streaming de fichiers MP4 et FLV
+
+### Nginx and PHP-FPM: a perfect match
+Source : 
+- https://www.stackscale.com/blog/php-fpm-high-traffic-websites/
+
+Nginx, as a stable high-performance web server and with a very low consumption of resources, is the perfect match for PHP-FPM. Nginx has an asynchronous architecture that is much more scalable, based on events. Moreover, when using Nginx with PHP-FPM, performance at the level of memory consumption is improved.
+
+PHP runs as a separated service when using PHP-FPM. By using this PHP version as language interpreter, requests are processed through a TCP/IP socket; so that the Nginx web server only handles the HTTP requests and PHP-FPM interprets the PHP code. The fact of having two separate services is key for increasing efficiency.
+
+#### Schéma : 
