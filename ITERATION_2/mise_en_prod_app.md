@@ -78,6 +78,7 @@ https://www.hostinger.fr/tutoriels/commandes-linux
 Source : 
 - https://www.theory7.net/fr/help/php-fpm/
 - https://www.stackscale.com/blog/php-fpm-high-traffic-websites/
+- https://geekflare.com/fr/php-fpm-optimization/
 
 PHP-FPM = PHP FastCGI Process Manager
 
@@ -130,4 +131,31 @@ Nginx, as a stable high-performance web server and with a very low consumption o
 
 PHP runs as a separated service when using PHP-FPM. By using this PHP version as language interpreter, requests are processed through a TCP/IP socket; so that the Nginx web server only handles the HTTP requests and PHP-FPM interprets the PHP code. The fact of having two separate services is key for increasing efficiency.
 
-#### Schéma : 
+#### Faites un schéma de l’interaction entre PHP-FPM, Nginx et votre code source quand un utilisateur souhaite accéder à la page d'accueil du site web
+
+![](/home/user/Pictures/php-and-nginx.webp)
+
+Source : https://geekflare.com/fr/php-fpm-optimization/
+
+#### Tuto - Comment installer PHP, PHP-FPM, NGINX et les configurer sur votre serveur et DESACTIVER Apache 
+- https://www.rosehosting.com/blog/how-to-install-php-7-4-with-nginx-on-ubuntu-20-04/
+- https://www.digitalocean.com/community/tutorials/how-to-install-php-7-4-and-set-up-a-local-development-environment-on-ubuntu-20-04
+- https://ubuntu.com/tutorials/install-and-configure-nginx#3-creating-our-own-website
+- https://www.cyberciti.biz/faq/star-stop-restart-apache2-webserver/
+
+
+### Limites de cette approche avec PHP-FPM et NGINX
+
+#### Quelles sont les problématiques qui vont survenir par rapport à la gestion des différents codes source (notamment par rapport à la diversité des technologies) ?
+
+Source : 
+- https://chat.openai.com/c/21e00df9-1cce-4e9d-b4e8-349f0bf66751
+
+**Problématique 1 :**
+PHP-FPM, utilisé pour les sites fonctionnant sous PHP. Si un autre site fonctionne sous un autre langage, il se peut qu'il ne puisse pas utiliser PHP-FPM.
+
+**Problématique 2 :** <br>
+**Isolation des ressources :** Contrairement à la conteneurisation, où vous pouvez isoler les ressources et les dépendances de votre application, le déploiement direct sur un serveur avec PHP-FPM et Nginx ne fournit pas une isolation aussi robuste. Cela signifie que si une application affecte négativement le serveur (par exemple, en utilisant trop de ressources CPU ou mémoire), cela peut affecter d'autres applications s'exécutant sur le même serveur.
+
+**Problématique 3 :** <br>
+**Dépendances système :** Vous devrez gérer manuellement les dépendances système de votre application, ce qui peut être fastidieux et peut entraîner des conflits entre les applications si elles ont des exigences différentes en matière de dépendances.
