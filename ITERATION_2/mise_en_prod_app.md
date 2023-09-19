@@ -159,3 +159,67 @@ PHP-FPM, utilisé pour les sites fonctionnant sous PHP. Si un autre site fonctio
 
 **Problématique 3 :** <br>
 **Dépendances système :** Vous devrez gérer manuellement les dépendances système de votre application, ce qui peut être fastidieux et peut entraîner des conflits entre les applications si elles ont des exigences différentes en matière de dépendances.
+
+## Mise en production d'application avec conteneurisation
+cf. livrables sur le drive + md
+
+### Comprendre Docker
+Source : 
+- https://datascientest.com/docker-guide-complet
+- https://ledatascientist.com/comprendre-docker-et-les-conteneurs/
+- https://course.valentinflgt.fr/#/c/2023/docker/1.-introduction
+- https://www.youtube.com/watch?v=GVogBCqrXck&list=PLn6POgpklwWq0iz59-px2z-qjDdZKEvWd --> Xavki crack en Système & Réseau
+- Kit 4 sur le drive
+
+### Faites une recherche sur les différents avantages qu’apporte la conteneurisation et essayé d’expliquer les grands principes avec vos mots
+
+**Isolation** <br>
+La conteneurisation permet d'isoler les différentes applications déployées/tournant/fonctionnant sur une même machine MAIS dans un environnement "isolé" de notre environnement local.
+
+Chaque application possède sa propre configuration, ses propres dépendances, librairies et packages. Si elles tournaient toutes sur le même environnement sans être isolées, cela créerait des conflits entre elles. <br>
+Par exemple, si deux applications du même environnement fonctionnent sous PHP 7.4 mais que chacune utilisent une librairie (ou autre) différentes (librairie A, librairie B) et bien il y aura des conflits et l'environnement ne saura pas laquelle exécutée. <br>
+
+Alors qu'avec la conteneurisation, comme les applications sont déployées dans un environnement dit "isolé", il sera possible de les exécuter. La conteneurisation évite ce problème, l’application ne dépend plus de l’hôte sur lequel il est déployé (ou développé) mais du conteneur dans lequel il est packagé, on dit qu'elle fonctionne de manière isolée sur le système hôte.
+
+**Portabilité** <br>
+Le fait que les applications ne dépendent plus que de leur conteneur permet de les déployer dans n'importe quel environnement (n'importe quel machines, serveurs...).<br> 
+**!!!** Elles fonctionnent de manières isolées sur le système hôte
+
+**Reproductibilité**<br>
+Ce point rejoint le précédent, une application (code source, dépendances, ...) packagée dans un conteneur permet de partager/fournir ce même conteneur, donc la même configuration, à différents environnements (machines, serveurs...)
+
+**Efficace**<br>
+La conteneurisation est en fait très efficace, rapide et permet de meilleures performances que les méthodes traditionnelles (machines virtuelles, déploiement manuel).<br>
+Par exemple, un déploiement via machine virtuelle requiert d'allouer des ressources de notre propre machine. Une machine virtuelle possède son propre système d'exploitation, ça prend donc du temps à la démarrer et l'arrêter. <br>
+A l'instar, un conteneur délivre uniquement les ressources nécessaires à une application. Il est donc beaucoup léger et simple ce qui permet de meilleures performances.
+
+**Scalable** <br>
+La conteneurisation permet de scaler, donc d'accroître l'ampleur/le volume de l'application en fonction des besoins.<br>
+Donc si on veut déployer une application sur d'autres environnements, on aura juste à utiliser son conteneur. C'est très rapide et simple.
+
+### Comment mapper un port dans Docker ?
+
+https://www.nicelydev.com/docker/mapper-port-reseau-docker 
+
+**ATTENTION :** <br>
+Utiliser la commande --> "sudo docker run -d -p 8080:80 nginx" au lieu de "sudo docker run --rm -p 8080:80 nginx" car "--rm" dit que l'on souhaite supprimer automatiquement le conteneur Docker du système une fois qu'il a terminé son exécution.
+
+### Quelle est la différence entre une image Docker et un conteneur ?
+Une image Docker peut être considérée comme une description du conteneur. En fait, c'est un modèle immuable utilisé pour créer un conteneur. Elle contient le code source de l'application, les bibliothèques, les dépendances et autres fichiers nécessaires à l'exécution de l'application.
+
+Un conteneur est juste une instance de l'image Docker, dans laquelle cette dernière est exécutée. Il s'agit d'une encapsulation légère d'une application et de son environnement d'exécution, fonctionnant de manière isolée sur le système hôte.
+
+Le Docker File contenant les instructions concernant l'image Docker, permet d'instancier l'image Docker dans un conteneur.
+
+### Que fait Docker si l'image demandée n'est pas présente localement ?
+Dans ce cas, il ne peut pas instancier l'image Docker. Il faut d'abord pull l'image Docker via sa registry
+
+### Est-ce que vos données sont encore présentes (sans volume persistant) ?
+Non les données ne sont plus présentes
+
+### How to create a Docker Volume 
+
+https://phoenixnap.com/kb/docker-volumes#:~:text=To%20mount%20a%20data%20volume,produced%20inside%20the%20virtual%20environment.&text=Replace%20%5Bpath_in_container%5D%20with%20the%20path,data%20volume%20in%20the%20container.
+
+### Est-ce que vos données sont encore présentes (avec volume persistant) ?
+
