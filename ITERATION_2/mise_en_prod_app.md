@@ -219,7 +219,55 @@ Non les données ne sont plus présentes
 
 ### How to create a Docker Volume 
 
+https://docs.docker.com/storage/volumes/
 https://phoenixnap.com/kb/docker-volumes#:~:text=To%20mount%20a%20data%20volume,produced%20inside%20the%20virtual%20environment.&text=Replace%20%5Bpath_in_container%5D%20with%20the%20path,data%20volume%20in%20the%20container.
 
 ### Est-ce que vos données sont encore présentes (avec volume persistant) ?
+Oui les données sont encore présentes !!!
+
+### Comprendre le principe de volume docker
+
+Définition : Les volumes sont utilisés pour persister les données et partager des fichiers entre le conteneur et l'hôte. Ils sont essentiels pour éviter la perte de données lorsque les conteneurs sont arrêtés ou supprimés.
+
+### Créer un volume Docker
+Source : 
+- https://docs.docker.com/storage/volumes/ 
+
+Pour créer un volume Docker, il y a 2 façons de faire :
+- -v ou --volume
+- --mount
+
+On va tout d'abord traiter la première façon : -v
+
+La notation complète ressemble à ça : <br>
+**-v myvolume:/directory/directory/...**
+
+Décortiquons cette notation : 
+- myvolume --> c'est le nom du volume mais pas que ! c'est également le chemin sur lequel sera monté le volume sur la machine hôte
+- : --> permet de séparer le chemin (directory) dans lequel le volume sera monté sur la machine hôte et sur le conteneur
+- /directory/directory/... --> directory dans laquelle sera monté le volume dans le conteneur, où l'image Docker choisie écrira par défaut ses fichiers de données <br>
+Cette directory est propre à chaque l'image Docker qu'on a choisi, par exemple si on choisit l'image Docker MariaDB, il faudra écrire ceci : **-v myvolume:/var/lib/mysql** <br>
+Bien évidemment, si on choisit une autre image Docker on écrira autre chose. On retrouve ce qu'il faut écrire sur le DockerHub de l'image à la section **"Caveats - Where to Store Data"**
+
+### Quelle est la différence entre une application statefull et stateless ?
+Source : 
+- https://www.redhat.com/en/topics/cloud-native-apps/stateful-vs-stateless --> anglais
+- https://renovacloud.com/stateful-vs-stateless-architecture-overview/?lang=en#:~:text=The%20key%20difference%20between%20stateful,that%20will%20survive%20service%20restarts. --> anglais
+- https://www.redhat.com/fr/topics/cloud-native-apps/stateful-vs-stateless#:~:text=Un%20processus%20ou%20une%20application,c'%C3%A9tait%20la%20premi%C3%A8re%20fois. --> français
+
+**Application Stateless :** <br>
+Une application stateless ne stocke pas les données, ne fait référence à aucune transaction passée. En fait, chaque transaction est effectuée comme si c'était la première fois qu'on l'effectuait. Les applications stateless fournissent un service ou une fonction et utilisent un réseau de diffusion de contenu, le web ou des serveurs d'impression pour traiter ces requêtes à court terme. 
+
+Par exemple, une recherche en ligne pour répondre à une question quelconque est une transaction stateless. Vous tapez votre question dans le moteur de recherche et appuyez sur Entrée. Si votre transaction est accidentellement interrompue ou fermée, vous devez en démarrer une nouvelle. Les transactions stateless sont comparables à des distributeurs automatiques : une seule requête et une seule réponse.
+
+**Application Stateful :** <br>
+Une application stateful, quant à elle, stocke les données. Les transactions précédentes sont prises en compte et peuvent affecter la transaction actuelle.
+
+Si une transaction stateful est interrompue, le contexte et l'historique sont stockés et vous pouvez ainsi reprendre là où vous en étiez. Les applications stateful gardent une trace de divers éléments, comme l'URL de la page, les paramètres de préférence et l'activité récente. Les transactions stateful sont comparables à une conversation continue et périodique avec la même personne. Les plateformes bancaires en ligne et les messageries en sont deux exemples.
+
+C'est pour cela que les applications stateful utilisent les mêmes serveurs chaque fois qu'elles traitent une requête d'un utilisateur.
+
+Aujourd'hui, la majorité des applications que l'on utilise sont stateful.
+
+### Lancer une application multi conteneur (avec docker-compose)
 
