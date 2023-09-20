@@ -271,3 +271,7 @@ Aujourd'hui, la majorité des applications que l'on utilise sont stateful.
 
 ### Lancer une application multi conteneur (avec docker-compose)
 
+Source : 
+- https://openclassrooms.com/fr/courses/2035766-optimisez-votre-deploiement-en-creant-des-conteneurs-avec-docker/6211677-creez-un-fichier-docker-compose-pour-orchestrer-vos-conteneurs
+- DockerHub --> sur la page de l'image Docker que l'on souhaite utiliser, tout est détaillé plus bas
+- https://www.techrepublic.com/article/how-to-build-a-docker-compose-file/
